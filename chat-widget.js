@@ -20,9 +20,9 @@
   var T = {
     ko: {
       name: '청이', sub: '강진청자 국보 · AI 안내',
-      bubble: '안녕하세요, 청이예요 🏺 무엇이든 물어보세요',
-      greet: '안녕하세요, 강진청자 국보의 안내 도우미 청이예요 🏺 청자 가격, 감사패 주문, 배송·AS, 오시는 길까지 무엇이든 물어보세요.',
-      chips: ['청자 가격대는?', '감사패 주문은 어떻게?', '배송·AS 안내', '공방 위치·방문'],
+      bubble: '안녕하세요, 청이예요 🏺 청자 제작 방법을 알려드릴까요? 문양·기법·가격도 물어보세요',
+      greet: '안녕하세요, 강진청자 국보의 안내 도우미 청이예요 🏺 청자는 어떻게 만들어지는지(청자토 3년 숙성부터 1300℃ 재벌까지 10단계), 운학문·모란문·상감 같은 어려운 문양과 기법의 뜻, 그리고 가격·감사패 주문·배송·AS·오시는 길까지 쉽게 설명해 드려요. 무엇이든 물어보세요.',
+      chips: ['청자는 어떻게 만들어요?', '상감기법·운학문이 뭐예요?', '청자 가격대는?', '감사패 주문은 어떻게?', '배송·AS 안내', '공방 위치·방문'],
       placeholder: '메시지를 입력하세요',
       send: '보내기', open: '청이에게 물어보기', close: '닫기',
       typing: '청이가 답을 준비하고 있어요…',
@@ -33,8 +33,8 @@
     en: {
       name: 'Cheong-i', sub: 'Gangjin Celadon GUKBO · AI Guide',
       bubble: 'Hi, I’m Cheong-i 🏺 Ask me anything',
-      greet: 'Hello! I’m Cheong-i, the AI guide for Gangjin Celadon GUKBO 🏺 Ask me about prices, corporate gifts, shipping, or how to visit the studio.',
-      chips: ['Price range?', 'Corporate gifts', 'Shipping & care', 'Where is the studio?'],
+      greet: 'Hello! I’m Cheong-i, the AI guide for Gangjin Celadon GUKBO 🏺 Want to know how celadon is made (10 steps, from 3-year aged clay to the 1300℃ second firing) or what the crane-and-cloud and inlay techniques mean? I can also help with prices, corporate gifts, shipping, and directions.',
+      chips: ['How is celadon made?', 'What is sanggam inlay?', 'Price range?', 'Corporate gifts', 'Shipping & care', 'Where is the studio?'],
       placeholder: 'Type a message',
       send: 'Send', open: 'Ask Cheong-i', close: 'Close',
       typing: 'Cheong-i is thinking…',
