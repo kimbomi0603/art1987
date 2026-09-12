@@ -244,6 +244,26 @@ async function callGroq(model, message, history, apiKey) {
 }
 
 // ───────────────────────────── 핸들러 ─────────────────────────────
+
+// ── 대화 기록 (2026-09-13) ─────────────────────────────────────────────
+// Vercel Storage 에서 Upstash(Redis) 를 연결하면 KV_REST_API_URL / KV_REST_API_TOKEN 이 자동으로 들어온다.
+// 없으면 기록하지 않고 조용히 넘어간다(답변에는 영향 없음). 질문·답변·시각·언어만 저장, IP 는 저장하지 않는다. 최근 1,000건.
+const RURL = process.env.KV_REST_API_URL || process.env.UPSTASH_REDIS_REST_URL || '';
+const RTOK = process.env.KV_REST_API_TOKEN || process.env.UPSTASH_REDIS_REST_TOKEN || '';
+async function redis(cmd) {
+  if (!RURL || !RTOK) return null;
+  const r = await fetch(RURL, { method: 'POST', headers: { Authorization: 'Bearer ' + RTOK, 'Content-Type': 'application/json' }, body: JSON.stringify(cmd), signal: AbortSignal.timeout(4000) });
+  return r.json();
+}
+async function logChat(message, text, model, lang) {
+  try {
+    if (!RURL) return;
+    const entry = JSON.stringify({ q: String(message).slice(0, 500), a: String(text).slice(0, 800), model, lang: lang || 'ko', ts: Date.now() });
+    await redis(['LPUSH', 'cheongi_chatlog', entry]);
+    await redis(['LTRIM', 'cheongi_chatlog', '0', '999']);
+  } catch (e) { /* 기록 실패는 무시 */ }
+}
+
 module.exports = async (req, res) => {
   const origin = req.headers.origin;
   const originOk = isAllowedOrigin(origin);
@@ -260,6 +280,17 @@ module.exports = async (req, res) => {
   res.setHeader('X-Content-Type-Options', 'nosniff');
 
   if (req.method === 'OPTIONS') { res.statusCode = originOk ? 204 : 403; return res.end(); }
+  // 관리자 — 대화 기록 조회: GET /api/chat?action=chatlog  (헤더 x-admin-key = ADMIN_KEY 환경변수). 키 없으면 403.
+  if (req.method === 'GET' && req.query && req.query.action === 'chatlog') {
+    const akey = req.headers['x-admin-key'] || '';
+    if (!process.env.ADMIN_KEY || akey !== process.env.ADMIN_KEY) { res.statusCode = 403; return res.json({ ok: false, error: 'forbidden' }); }
+    if (!RURL) return res.json({ ok: true, items: [], note: 'Redis(KV) 미연결 — Vercel Storage 에서 Upstash 연결 필요' });
+    try {
+      const rr = await redis(['LRANGE', 'cheongi_chatlog', '0', '199']);
+      const items = ((rr && rr.result) || []).map(x => { try { return JSON.parse(x); } catch (e) { return null; } }).filter(Boolean);
+      return res.json({ ok: true, items });
+    } catch (e) { return res.json({ ok: false, items: [] }); }
+  }
   if (req.method !== 'POST') { res.statusCode = 405; res.setHeader('Allow', 'POST'); return res.json({ ok: false, error: 'POST만 지원합니다.' }); }
   if (!originOk) { res.statusCode = 403; return res.json({ ok: false, error: '허용되지 않은 출처입니다.' }); }
 
@@ -290,6 +321,7 @@ module.exports = async (req, res) => {
     for (const m of GEMINI_MODELS) {
       try {
         const text = await callGemini(m, message, history, geminiKey);
+        await logChat(message, text, m, body && body.lang);
         return res.json({ ok: true, model: m, text });
       } catch (e) { failures.push(e && e.message ? e.message : String(e)); }
     }
@@ -298,6 +330,7 @@ module.exports = async (req, res) => {
     for (const m of GROQ_MODELS) {
       try {
         const text = await callGroq(m, message, history, groqKey);
+        await logChat(message, text, m, body && body.lang);
         return res.json({ ok: true, model: m, text });
       } catch (e) { failures.push(e && e.message ? e.message : String(e)); }
     }
