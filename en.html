@@ -348,6 +348,9 @@ header.hero .tag { margin:22px auto 0; max-width:42em; color:#D6D3C8; }
   header.hero { min-height:86vh; }
 }
 
+/* 2026-09-17 점검: 한글 단어 중간 줄바꿈 방지, 모바일 메뉴가 옆으로 더 있음을 표시 */
+body { word-break: keep-all; overflow-wrap: break-word; }
+@media (max-width: 700px) { nav.top .links { -webkit-mask-image: linear-gradient(90deg, #000 85%, transparent); mask-image: linear-gradient(90deg, #000 85%, transparent); } }
 </style>
 </head>
 <body>
