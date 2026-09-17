@@ -264,6 +264,14 @@ async function logChat(message, text, model, lang) {
   } catch (e) { /* 기록 실패는 무시 */ }
 }
 
+// 관리자 키 비교 — 길이·내용을 상수 시간으로 비교(타이밍 추측 방지)
+function safeEqual(a, b) {
+  const crypto = require('crypto');
+  const ha = crypto.createHash('sha256').update(String(a)).digest();
+  const hb = crypto.createHash('sha256').update(String(b)).digest();
+  return crypto.timingSafeEqual(ha, hb);
+}
+
 module.exports = async (req, res) => {
   const origin = req.headers.origin;
   const originOk = isAllowedOrigin(origin);
@@ -282,8 +290,8 @@ module.exports = async (req, res) => {
   if (req.method === 'OPTIONS') { res.statusCode = originOk ? 204 : 403; return res.end(); }
   // 관리자 — 대화 기록 조회: GET /api/chat?action=chatlog  (헤더 x-admin-key = ADMIN_KEY 환경변수). 키 없으면 403.
   if (req.method === 'GET' && req.query && req.query.action === 'chatlog') {
-    const akey = req.headers['x-admin-key'] || '';
-    if (!process.env.ADMIN_KEY || akey !== process.env.ADMIN_KEY) { res.statusCode = 403; return res.json({ ok: false, error: 'forbidden' }); }
+    const akey = String(req.headers['x-admin-key'] || '');
+    if (!process.env.ADMIN_KEY || !safeEqual(akey, process.env.ADMIN_KEY)) { res.statusCode = 403; return res.json({ ok: false, error: 'forbidden' }); }
     if (!RURL) return res.json({ ok: true, items: [], note: 'Redis(KV) 미연결 — Vercel Storage 에서 Upstash 연결 필요' });
     try {
       const rr = await redis(['LRANGE', 'cheongi_chatlog', '0', '199']);
