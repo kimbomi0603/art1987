@@ -51,7 +51,8 @@ module.exports = async function (req, res) {
   if (req.method === "OPTIONS") return res.status(204).end();
   if (req.method === "GET") return res.status(200).json({ ok: true, name: "회의록 AI 도우미 (Gemini + Groq 예비)", tasks: Object.keys(PROMPTS) });
   if (req.method !== "POST") return res.status(405).json({ ok: false, error: "POST only" });
-  if (origin && !okOrigin) return res.status(403).json({ ok: false, error: "forbidden origin" });
+  // Origin 없는 POST(curl 등 외부 남용)는 거부 — 브라우저 앱은 항상 Origin을 보낸다(2026-09-17 점검)
+  if (!origin || !okOrigin) return res.status(403).json({ ok: false, error: "forbidden origin" });
 
   var KEY = process.env.GEMINI_API_KEY || process.env.GOOGLE_API_KEY || "";
   var GROQ = process.env.GROQ_API_KEY || "";
