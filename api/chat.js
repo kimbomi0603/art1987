@@ -125,11 +125,12 @@ const FETCH_TIMEOUT_MS = 25 * 1000;
 const rateMap = new Map();
 
 function isAllowedOrigin(origin) {
-  if (!origin) return true; // curl 등 Origin 없는 요청(서버 간·테스트) 허용. 브라우저는 항상 Origin을 보낸다.
+  if (!origin) return false; // 브라우저는 POST에 항상 Origin을 붙인다. Origin 없는 호출(curl 등 외부 남용)은 거부(2026-09-17 점검).
   try {
     const u = new URL(origin);
     if (ALLOWED_ORIGINS.includes(u.origin)) return true;
-    if (u.protocol === 'https:' && u.hostname.endsWith('.vercel.app')) return true;
+    // *.vercel.app 전체가 아니라 이 프로젝트의 운영·프리뷰 주소만 허용(아무나 만든 vercel.app 차단)
+    if (u.protocol === 'https:' && (u.hostname === 'art1987.vercel.app' || /^art1987-[a-z0-9-]+-gangjinbom\.vercel\.app$/.test(u.hostname))) return true;
     if (u.hostname === 'localhost' || u.hostname === '127.0.0.1') return true;
   } catch (_) { /* 잘못된 Origin → 거부 */ }
   return false;
