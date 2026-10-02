@@ -2,4 +2,7 @@ User-agent: *
 Allow: /
 Disallow: /api/
 
+User-agent: Yeti
+Allow: /
+
 Sitemap: https://art1987.kr/sitemap.xml

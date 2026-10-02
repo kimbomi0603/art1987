@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://art1987.kr/</loc><lastmod>2026-09-12</lastmod><changefreq>weekly</changefreq><priority>1.0</priority></url>
-  <url><loc>https://art1987.kr/craft.html</loc><lastmod>2026-09-12</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://art1987.kr/works.html</loc><lastmod>2026-09-12</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://art1987.kr/products.html</loc><lastmod>2026-09-12</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://art1987.kr/tableware.html</loc><lastmod>2026-09-12</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://art1987.kr/gift.html</loc><lastmod>2026-09-12</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://art1987.kr/plaque.html</loc><lastmod>2026-09-12</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://art1987.kr/buy.html</loc><lastmod>2026-09-12</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://art1987.kr/guide.html</loc><lastmod>2026-09-12</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://art1987.kr/en.html</loc><lastmod>2026-09-12</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url><loc>https://art1987.kr/</loc><lastmod>2026-10-02</lastmod><changefreq>weekly</changefreq><priority>1.0</priority><image:image><image:loc>https://art1987.kr/og.jpg</image:loc></image:image><image:image><image:loc>https://art1987.kr/hero_dark.jpg</image:loc></image:image></url>
+  <url><loc>https://art1987.kr/craft.html</loc><lastmod>2026-10-02</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://art1987.kr/works.html</loc><lastmod>2026-10-02</lastmod><changefreq>monthly</changefreq><priority>0.9</priority><image:image><image:loc>https://art1987.kr/gal_unhak_mae.jpg</image:loc></image:image><image:image><image:loc>https://art1987.kr/gal_moran_pair.jpg</image:loc></image:image><image:image><image:loc>https://art1987.kr/gal_c_biryong.jpg</image:loc></image:image></url>
+  <url><loc>https://art1987.kr/products.html</loc><lastmod>2026-10-02</lastmod><changefreq>monthly</changefreq><priority>0.9</priority><image:image><image:loc>https://art1987.kr/moon_thumb.jpg</image:loc></image:image></url>
+  <url><loc>https://art1987.kr/plaque.html</loc><lastmod>2026-10-02</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://art1987.kr/tableware.html</loc><lastmod>2026-10-02</lastmod><changefreq>monthly</changefreq><priority>0.8</priority><image:image><image:loc>https://art1987.kr/img/tw_series1.jpg</image:loc></image:image></url>
+  <url><loc>https://art1987.kr/gift.html</loc><lastmod>2026-10-02</lastmod><changefreq>monthly</changefreq><priority>0.9</priority><image:image><image:loc>https://art1987.kr/img/gift_group.jpg</image:loc></image:image></url>
+  <url><loc>https://art1987.kr/guide.html</loc><lastmod>2026-10-02</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://art1987.kr/buy.html</loc><lastmod>2026-10-02</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://art1987.kr/en.html</loc><lastmod>2026-10-02</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
 </urlset>
