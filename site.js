@@ -36,7 +36,7 @@
       if (im.closest('a')) return;
       im.style.cursor = 'zoom-in';
       im.addEventListener('click', function () {
-        ov.querySelector('img').src = im.currentSrc || im.src;
+        ov.querySelector('img').src = im.currentSrc || im.src; ov.querySelector('img').alt = im.alt || '';
         var fig = im.closest('figure'); var t = fig && fig.querySelector('.plaque .t, figcaption');
         ov.querySelector('figcaption').textContent = t ? t.textContent : (im.alt || '');
         ov.classList.add('open'); document.body.style.overflow = 'hidden';
