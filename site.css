@@ -326,6 +326,27 @@ table.gloss td { border-top:1px solid var(--line); padding:10px 16px; }
 .plaquegrid { display:grid; grid-template-columns:1.1fr .9fr; gap:44px; align-items:start; margin-top:8px; }
 .plaquegrid img { border:1px solid var(--line); }
 
+/* ── 연혁 타임라인 ────────────────────────── */
+.tl { list-style:none; margin:30px 0 0; padding:0; border-left:1px solid var(--line-2, var(--line)); }
+.tl li { position:relative; padding:0 0 26px 28px; }
+.tl li::before { content:''; position:absolute; left:-5px; top:9px; width:9px; height:9px; border-radius:50%; background:var(--bg); border:1px solid var(--gold); }
+.tl .yr { font-family:var(--roman); font-size:20px; color:var(--gold); letter-spacing:.06em; line-height:1; display:block; margin-bottom:6px; }
+.tl b { font-weight:600; }
+.tl p { margin:2px 0 0; font-size:14px; color:var(--ink-2); }
+.tl .src { font-family:var(--sans); font-size:11.5px; color:var(--dim); margin-left:6px; }
+.tl .src a { color:var(--dim); text-decoration:none; border-bottom:1px dotted var(--dim); }
+.bio { display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--line); border:1px solid var(--line); margin:30px 0; }
+.bio > div { background:var(--surface); padding:28px 28px; }
+.bio h3 { font-family:var(--serif); font-size:19px; font-weight:500; letter-spacing:.04em; margin:0 0 4px; }
+.bio .role { font-family:var(--roman); font-size:13px; letter-spacing:.2em; color:var(--gold); margin-bottom:14px; }
+.bio ul { margin:0; padding-left:18px; color:var(--ink-2); font-size:13.5px; }
+.bio li { margin:4px 0; }
+.bio .yr { font-family:var(--roman); color:var(--gold); margin-right:6px; }
+.certs { display:flex; flex-wrap:wrap; gap:10px; margin:24px 0 0; }
+.cert { border:1px solid var(--gold-soft); padding:10px 18px; font-family:var(--sans); font-size:12.5px; color:var(--ink-2); }
+.cert b { display:block; color:var(--gold); font-family:var(--roman); font-size:12px; letter-spacing:.2em; margin-bottom:2px; }
+@media (max-width:760px) { .bio { grid-template-columns:1fr; } }
+
 /* ── 푸터 ─────────────────────────────────── */
 footer { margin-top:130px; background:#0B0E10; color:#8D978C; border-top:1px solid var(--gold-soft); }
 footer .in { max-width:var(--wrap); margin:0 auto; padding:64px var(--gutter) 40px; display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr; gap:40px; }
